@@ -1,0 +1,142 @@
+<div class="row">
+    <img src="/images/acapuedo-logo.svg" height="200" class="rounded mx-auto d-block" alt="...">
+</div>
+<h1 class="h1 text-center"> Formulario de Registro</h1>
+
+
+<form class="row g-3 needs-validation" id="{{id}}" novalidate method="{{method}}" action="{{action}}">
+    <legend>Registrar Cuenta</legend>
+    <div class="col-12 position-relative">
+        <label for="validationCustom02" class="form-label">Tipo de Negocio</label>
+        <select class="form-select" id="validationCustom04" required>
+            <option selected value="">Elegir tipo de persona</option>
+            <option value="1">Persona física (A título personal)</option>
+            <option value="2">Persona jurídica (Comercio, despensa o empresa)</option>
+        </select>
+        <div class="valid-feedback">
+            Correcto.
+        </div>
+        <div class="valid-feedback">
+            Debe seleccionar el tipo de persona
+        </div>
+    </div>
+    <div class="col-12 position-relative">
+        <label for="validationCustom02" class="form-label">Número de cédula</label>
+        <input type="text" class="form-control" id="" required>
+        <div class="invalid-feedback">
+            Debe proporcionar un número de cédula
+        </div>
+    </div>
+    <div class="col-12 position-relative">
+        <label for="validationCustom02" class="form-label">Celular</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="validationCustom02" required placeholder="Ej.: 0981 123456">
+            <!--button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                Enviar PIN
+            </button -->
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" disabled>
+                <span class="spinner-grow spinner-grow-sm text-secondary" role="status"></span>
+                Enviando PIN...
+            </button>
+        </div>
+        <div class="invalid-feedback">
+            Requerido. Número de telefono inválido.
+        </div>
+    </div>
+    <div class="col-12 position-relative">
+        <label for="validationCustom02" class="form-label">PIN</label>
+        <input type="text" class="form-control" id="" required>
+        <div class="invalid-feedback">
+            Debe proporcionar el PIN enviado
+        </div>
+    </div>
+
+    <legend>Datos del titular</legend>
+    <div class="col-md-4 position-relative">
+        <label for="validationCustom02" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustomUsername" class="form-label">Username</label>
+        <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
+                required>
+            <div class="invalid-tooltip">
+                Please choose a username.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 position-relative">
+        <label for="validationCustom04" class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control" id="validationCustom04" required>
+        <div class="invalid-tooltip">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="col-md-6 position-relative">
+        <label for="validationCustom03" class="form-label">City</label>
+        <input type="text" class="form-control" id="validationCustom03" required>
+        <div class="invalid-tooltip">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="col-md-3 position-relative">
+        <label for="validationCustom04" class="form-label">State</label>
+        <select class="form-select" id="validationCustom04" required>
+            <option selected disabled value="">Choose...</option>
+            <option>...</option>
+        </select>
+        <div class="invalid-tooltip">
+            Please select a valid state.
+        </div>
+    </div>
+    <div class="col-md-3 position-relative">
+        <label for="validationCustom05" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="validationCustom05" required>
+        <div class="invalid-tooltip">
+            Please provide a valid zip.
+        </div>
+    </div>
+    <div class="col-12 position-relative">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+                Agree to terms and conditions
+            </label>
+            <div class="invalid-tooltip">
+                You must agree before submitting.
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn  btn-lg btn-primary" type="submit">Submit form</button>
+    </div>
+
+
+</form>
+
+
+<script>
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
