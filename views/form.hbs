@@ -7,33 +7,33 @@
 <form class="row g-3 needs-validation" id="{{id}}" novalidate method="{{method}}" action="{{action}}">
     <legend>Registrar Cuenta</legend>
     <div class="col-12 position-relative">
-        <label for="validationCustom02" class="form-label">Tipo de Negocio</label>
-        <select class="form-select" id="validationCustom04" required>
+        <label for="tipo_persona" class="form-label">Tipo de Negocio</label>
+        <select class="form-select" id="tipo_persona" required>
             <option selected value="">Elegir tipo de persona</option>
-            <option value="1">Persona física (A título personal)</option>
-            <option value="2">Persona jurídica (Comercio, despensa o empresa)</option>
+            <option value="F">Persona física (A título personal)</option>
+            <option value="J">Persona jurídica (Comercio, despensa o empresa)</option>
         </select>
         <div class="valid-feedback">
             Correcto.
         </div>
-        <div class="valid-feedback">
+        <div class="invalid-feedback">
             Debe seleccionar el tipo de persona
         </div>
     </div>
     <div class="col-12 position-relative">
-        <label for="validationCustom02" class="form-label">Número de cédula</label>
-        <input type="text" class="form-control" id="" required>
+        <label for="cedula" class="form-label">Número de cédula</label>
+        <input type="text" class="form-control" id="cedula" required>
         <div class="invalid-feedback">
             Debe proporcionar un número de cédula
         </div>
     </div>
     <div class="col-12 position-relative">
-        <label for="validationCustom02" class="form-label">Celular</label>
+        <label for="celular" class="form-label">Celular</label>
         <div class="input-group">
-            <input type="text" class="form-control" id="validationCustom02" required placeholder="Ej.: 0981 123456">
-            <!--button class="btn btn-outline-secondary" type="button" id="button-addon2">
+            <input type="text" class="form-control" id="celular" required placeholder="Ej.: 0981 123456">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
                 Enviar PIN
-            </button -->
+            </button>
             <button class="btn btn-outline-secondary" type="button" id="button-addon2" disabled>
                 <span class="spinner-grow spinner-grow-sm text-secondary" role="status"></span>
                 Enviando PIN...
@@ -44,83 +44,144 @@
         </div>
     </div>
     <div class="col-12 position-relative">
-        <label for="validationCustom02" class="form-label">PIN</label>
-        <input type="text" class="form-control" id="" required>
+        <label for="pin" class="form-label">PIN</label>
+        <input type="text" class="form-control" id="pin" required>
         <div class="invalid-feedback">
             Debe proporcionar el PIN enviado
         </div>
     </div>
 
     <legend>Datos del titular</legend>
-    <div class="col-md-4 position-relative">
-        <label for="validationCustom02" class="form-label">Last name</label>
-        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+    <div class="col-md-6 position-relative">
+        <label for="nombre_titular" class="form-label">Nombre/s *</label>
+        <input type="text" class="form-control" id="nombre_titular" required>
         <div class="valid-feedback">
             Looks good!
         </div>
     </div>
+    <div class="col-md-6 position-relative">
+        <label for="apellido_titular" class="form-label">Apellido/s *</label>
+        <input type="text" class="form-control" id="apellido_titular" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4 position-relative">
+        <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control" id="fecha_nacimiento" required>
+        <div class="invalid-tooltip">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="col-md-4 position-relative">
+        <label for="cedula" class="form-label">Cédula</label>
+        <input type="text" class="form-control" id="cedula" required>
+        <div class="invalid-tooltip">
+            Please provide a valid city.
+        </div>
+    </div>
     <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">Username</label>
-        <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
-                required>
-            <div class="invalid-tooltip">
-                Please choose a username.
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 position-relative">
-        <label for="validationCustom04" class="form-label">Fecha de nacimiento</label>
-        <input type="date" class="form-control" id="validationCustom04" required>
+        <label for="telefono" class="form-label">Nro de Telefono</label>
+        <input type="text" class="form-control" id="telefono" aria-describedby="inputGroupPrepend"
+            required>
         <div class="invalid-tooltip">
-            Please provide a valid city.
+            Please choose a username.
         </div>
     </div>
-    <div class="col-md-6 position-relative">
-        <label for="validationCustom03" class="form-label">City</label>
-        <input type="text" class="form-control" id="validationCustom03" required>
+
+    <legend>Datos del Comercio</legend>
+    <div class="col-md-4 is_juridica">
+        <label for="razon_social" class="form-label">Razón Social</label>
+        <input type="text" class="form-control" id="razon_social" aria-describedby="inputGroupPrepend">
         <div class="invalid-tooltip">
-            Please provide a valid city.
+            Please choose a username.
         </div>
     </div>
-    <div class="col-md-3 position-relative">
-        <label for="validationCustom04" class="form-label">State</label>
-        <select class="form-select" id="validationCustom04" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
-        </select>
+
+    <div class="col-md-4 is_juridica">
+        <label for="ruc" class="form-label">RUC</label>
+        <input type="text" class="form-control" id="ruc" aria-describedby="inputGroupPrepend">
         <div class="invalid-tooltip">
-            Please select a valid state.
+            Please choose a username.
         </div>
     </div>
-    <div class="col-md-3 position-relative">
-        <label for="validationCustom05" class="form-label">Zip</label>
-        <input type="text" class="form-control" id="validationCustom05" required>
+    <div class="col-md-4 is_juridica">
+        <label for="fecha_creacion" class="form-label">Fecha de creación</label>
+        <input type="date" class="form-control" id="fecha_creacion" aria-describedby="inputGroupPrepend">
         <div class="invalid-tooltip">
-            Please provide a valid zip.
+            Please choose a username.
         </div>
     </div>
-    <div class="col-12 position-relative">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-            <label class="form-check-label" for="invalidCheck">
-                Agree to terms and conditions
-            </label>
-            <div class="invalid-tooltip">
-                You must agree before submitting.
-            </div>
+    <legend>Dirección</legend>
+    <div class="col-md-4">
+        <label for="dir_calle_principal" class="form-label">Calle principal</label>
+        <input type="text" class="form-control" id="dir_calle_principal" aria-describedby="inputGroupPrepend">
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label for="dir_nro_casa" class="form-label">Numero de casa</label>
+        <input type="text" class="form-control" id="dir_nro_casa" aria-describedby="inputGroupPrepend">
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label for="dir_barrio" class="form-label">Barrio</label>
+        <input type="text" class="form-control" id="dir_barrio" aria-describedby="inputGroupPrepend">
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label for="dir_ciudad" class="form-label">Ciudad</label>
+        <input type="text" class="form-control" id="dir_ciudad" aria-describedby="inputGroupPrepend">
+        <div class="invalid-tooltip">
+            Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label for="map" class="form-label">Indicar ubicación</label>
+        <div id="map" style="height: 350px;"></div>
+    </div>
+    
+    <div class="col-md-4">
+        <label for="foto_cedula_front" class="form-label">Foto frontal de tu cédula</label>
+        <div class="input-group">
+            <input type="file" class="form-control" id="foto_cedula_front" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04"><i class="bi bi-eye"></i></button>
+            <button class="btn btn-outline-danger" type="button" id="inputGroupFileAddon04"><i class="bi bi-trash"></i></button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="foto_cedula_back" class="form-label">Foto del reverso de tu cédula</label>
+        <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="foto_cedula_back" aria-label="Upload">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04"><i class="bi bi-eye"></i></button>
+            <button class="btn btn-outline-danger" type="button" id="inputGroupFileAddon04"><i class="bi bi-trash"></i></button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="foto_cedula_selfie" class="form-label">Una selfie con tu cédula</label>
+        <div class="input-group">
+            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="foto_cedula_selfie" aria-label="Upload">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04"><i class="bi bi-eye"></i></button>
+            <button class="btn btn-outline-danger" type="button" id="inputGroupFileAddon04"><i class="bi bi-trash"></i></button>
         </div>
     </div>
     <div class="col-12">
-        <button class="btn  btn-lg btn-primary" type="submit">Submit form</button>
+        <button class="btn  btn-lg btn-primary" type="submit">Registrarse</button>
     </div>
-
 
 </form>
 
 
 <script>
+    
+    
+
+
     (function () {
         'use strict'
 
@@ -138,5 +199,34 @@
                     form.classList.add('was-validated')
                 }, false)
             })
-    })()
+    })();
+    var map = L.map('map').setView([-25.3067264, -57.5307776], 15);
+    var marker = L.marker([-25.3067264, -57.5307776], {draggable: true}).addTo(map);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiZGFtaWRlbGVvbiIsImEiOiJja3pndXRobDMweXc5MnduMnB2c202cmEzIn0.H_C4H3pG0jckrR9oYiiDuQ'
+    }).addTo(map);
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        marker
+            .setLatLng(e.latlng);
+    }
+    map.on('click', onMapClick);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }       
+    function showPosition(position){
+        map.setView([position.coords.latitude, position.coords.longitude]);
+        marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+    }
+
+
 </script>
