@@ -1,0 +1,37 @@
+<div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
+    <div class="col-sm-8">
+        <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post"
+            action="/form/datos_comercio">
+            <legend>Datos del Comercio</legend>
+            <div class="col-md-4 is_juridica">
+                <label for="razon_social" class="form-label">Razón Social</label>
+                <input type="text" class="form-control" id="razon_social" aria-describedby="inputGroupPrepend">
+                <div class="invalid-tooltip">
+                    Please choose a username.
+                </div>
+            </div>
+
+            <div class="col-md-4 is_juridica position-relative">
+                <label for="ruc" class="form-label">RUC</label>
+                <input type="text" class="form-control" id="ruc" aria-describedby="inputGroupPrepend">
+                <div class="invalid-tooltip">
+                    Please choose a username.
+                </div>
+            </div>
+            <div class="col-md-4 is_juridica position-relative">
+                <label for="fecha_creacion" class="form-label">Fecha de creación</label>
+                <input type="date" class="form-control" id="fecha_creacion" aria-describedby="inputGroupPrepend">
+                <div class="invalid-tooltip">
+                    Please choose a username.
+                </div>
+            </div>
+            <div class="col-12 pt-5">
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-dark btn-lg" href="/form"><i class="bi bi-arrow-left"></i> Atrás</a>
+                    <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

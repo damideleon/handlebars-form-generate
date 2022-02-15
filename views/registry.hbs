@@ -1,0 +1,58 @@
+<div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
+    <div class="col-sm-8">
+        <form class="row shadow g-3 p-3 needs-validation bg-body" novalidate method="post" action="form/registry">
+            <legend>Datos del titular</legend>
+            <div class="col-md-6 position-relative">
+                <label for="nombre_titular" class="form-label">Nombre/s *</label>
+                <input type="text" class="form-control" id="nombre_titular" required>
+                <div class="invalid-tooltip">
+                    Ingrese Nombre
+                </div>
+            </div>
+            <div class="col-md-6 position-relative">
+                <label for="apellido_titular" class="form-label">Apellido/s *</label>
+                <input type="text" class="form-control" id="apellido_titular" required>
+                <div class="valid-feedback">
+                    Ingrese Apellido
+                </div>
+            </div>
+            <div class="col-md-4 position-relative">
+                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" id="fecha_nacimiento" required>
+                <div class="invalid-tooltip">
+                    Ingrese fecha de nacimiento
+                </div>
+            </div>
+            <div class="col-md-4 position-relative">
+                <label for="cedula" class="form-label">Cédula</label>
+                <input type="text" class="form-control" id="cedula" required>
+                <div class="invalid-tooltip">
+                    Ingrese su numero de cédula
+                </div>
+            </div>
+            <div class="col-md-4 position-relative">
+                <label for="telefono" class="form-label">Nro de Telefono</label>
+                <input type="text" class="form-control" id="celular" required value="{{celular}}">
+                <div class="invalid-tooltip">
+                    Ingrese un numero de telefono
+                </div>
+            </div>
+        <div class="col-12 pt-5">
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-dark btn-lg" href="/form"><i class="bi bi-arrow-left"></i> Atrás</a>
+                <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i> </button>
+            </div>
+        </div>
+
+        </form>
+        
+
+    </div>
+</div>
+
+
+
+<script>
+
+
+</script>

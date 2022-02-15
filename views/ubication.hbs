@@ -1,0 +1,112 @@
+<div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
+    <div class="col-sm-8">
+        <div class="row">
+            <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post"
+                action="/form/photos">
+                <legend>Dirección</legend>
+                <div class="col-md-9 position-relative">
+                    <label for="dir_calle_principal" class="form-label">Calle principal</label>
+                    <input type="text" class="form-control" id="dir_calle_principal" required
+                        >
+                    <div class="invalid-tooltip">
+                        Ingresar nombre de la calle
+                    </div>
+                </div>
+                <div class="col-md-3 position-relative">
+                    <label for="dir_nro_casa" class="form-label">Numero de casa</label>
+                    <input type="text" class="form-control" id="dir_nro_casa"  required>
+                    <div class="invalid-tooltip">
+                        Ingresar numero de la casa
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="dir_calle_secundaria" class="form-label">Calle secundaria (opcional)</label>
+                    <div class="input-group">
+                        <select class="form-select col-md-2 col-sm-3" id="inseccion_tipo">
+                            <option value="casi">casi</option>
+                            <option value="esquina">esquina</option>
+                            <option value="entre">entre</option>
+                        </select>
+                        <input type="text" class="form-control" id="dir_calle_secundaria" >
+                    </div>
+                </div>
+                <div class="row g-3  col-md-5">
+                    <div class="col-md-12">
+                    <label for="dir_barrio" class="form-label">Barrio</label>
+                    <input type="text" class="form-control" id="dir_barrio" required>
+                    <div class="invalid-tooltip">
+                        Ingresar nombre del barrio
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="dir_ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="dir_ciudad" required>
+                    <div class="invalid-tooltip">
+                        Escribir el nombre de la ciudad
+                    </div>
+                </div>
+                 <div class="col-md-12">
+                    <label for="dir_ciudad" class="form-label">Latitud</label>
+                    <input type="text" class="form-control" id="gps_lat" readonly >
+                </div>
+                 <div class="col-md-12">
+                    <label for="dir_ciudad" class="form-label">Longitud</label>
+                    <input type="text" class="form-control" id="gps_lon" readonly>
+                </div>
+                
+                </div>
+                <div class="col-md-7">
+                     <div class="col">
+                        <label for="map" class="form-label">Indicar ubicación</label>
+                     <div id="map" style="height: 350px;"></div>
+                </div>
+
+                </div>
+                
+               
+                <div class="col-12 pt-5">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-dark btn-lg" href="/form"><i class="bi bi-arrow-left"></i> Atrás</a>
+                        <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var map = L.map('map').setView([-25.3067264, -57.5307776], 15);
+    var marker = L.marker([-25.3067264, -57.5307776], { draggable: true }).addTo(map);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiZGFtaWRlbGVvbiIsImEiOiJja3pndXRobDMweXc5MnduMnB2c202cmEzIn0.H_C4H3pG0jckrR9oYiiDuQ'
+    }).addTo(map);
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        marker.setLatLng(e.latlng);
+    }
+
+    map.on('click', onMapClick);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    function showPosition(position) {
+        $("#gps_lat").val(position.coords.latitude);
+        $("#gps_lon").val(position.coords.longitude);
+        map.setView([position.coords.latitude, position.coords.longitude]);
+        marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+    }
+</script>
