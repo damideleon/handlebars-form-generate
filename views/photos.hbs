@@ -1,9 +1,12 @@
 <div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
     <div class="col-sm-8">
         <div class="row">
+            <legend class="text-light">
+                Ya casi terminamos...
+            </legend>
             <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post"
                 action="/form/datos_comercio">
-                <div class="col-md-6">
+                <div class="col-12">
                     <label for="foto_cedula_front" class="form-label">Foto frontal de tu cédula</label>
                     <div class="input-group">
                         <input type="file" class="form-control" id="foto_cedula_front"
@@ -14,7 +17,7 @@
                                 class="bi bi-trash"></i></button>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-12">
                     <label for="foto_cedula_back" class="form-label">Foto del reverso de tu cédula</label>
                     <div class="input-group">
                         <input type="file" class="form-control" id="inputGroupFile04"
@@ -25,7 +28,7 @@
                                 class="bi bi-trash"></i></button>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-12">
                     <label for="foto_cedula_selfie" class="form-label">Una selfie con tu cédula</label>
                     <div class="input-group">
                         <input type="file" class="form-control" id="inputGroupFile04"
@@ -34,6 +37,13 @@
                                 class="bi bi-eye"></i></button>
                         <button class="btn btn-outline-danger" type="button" id="inputGroupFileAddon04"><i
                                 class="bi bi-trash"></i></button>
+                    </div>
+                </div>
+                <div class="col-12 pt-5">
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-dark btn-lg" href="form/ubication"><i class="bi bi-arrow-left"></i> Atrás</a>
+                        <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
             </form>

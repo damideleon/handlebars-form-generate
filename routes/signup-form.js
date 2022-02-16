@@ -3,7 +3,6 @@ var router = express.Router();
 const crypto = require('crypto');
 const dotenv = require('dotenv');
 const helpers = require('../helpers');
-const { report } = require('process');
 dotenv.config();
 
 
@@ -13,41 +12,54 @@ const secret = process.env.TWILIO_SECRET;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilio_number = process.env.TWILIO_NUMBER;
 
-const client = require('twilio')(accountSid, authToken);
 
-router
-.post('/sendpin/:number', function(req, res, next) {
+
+router.post('/sendpin/:number', function (req, res, next) {
     destinatario = helpers.normalizePYnumber(req.params.number);
 
-    if(!destinatario)
-        res.json({"error": true, "message": "numero inválido"});
+    if (!destinatario.pass) {
+        res.json({
+            "error": true,
+            "message": "numero inválido"
+        });
+    }
 
-    var pin = crypto.randomInt(1000, 9999);
-    
-    if(req.session.tries){
+
+    if (req.session.tries) {
         req.session.tries++
-        req.session.pin = pin;
     } else {
         req.session.id = crypto.randomUUID();
-        req.session.pin = pin;
-        req.session.verification = false;
+        req.session.pin = crypto.randomInt(1000, 9999);;
         req.session.tries = 1;
-        req.session.verified = false;
+        req.session.verify = false;
     }
-
+    //for tests
     
-    
 
-    if(req.session.tries > 3){
+    if (req.session.tries > 3) {
         req.session = null;
-        res.json({"error": true, "message": "Intente luego de un minuto"});
+        req.body.error = "Se ha intendado muchas veces el PIN, verifique el número de teléfono, y reenvie"
+        res.render("form", req.body);
+    } else {
+        /*
+        const client = require('twilio')(accountSid, authToken);
+        
+        client.messages
+            .create({
+                body: 'a ' + pin,
+                from: twilio_number,
+                to: destinatario.msisdn
+            })
+            .then(message => {
+                res.json({
+                    "enviado": true,
+                    "estado": message.status,
+                    session: req.session
+                });
+            });*/
+            res.json({pass:true})
     }
-
-    client.messages
-      .create({body: 'a '+ pin, from: twilio_number, to: destinatario.msisdn})
-      .then(message => {
-          res.json({"enviado": true, "estado": message.status, session: req.session});
-      });
-  });
+    
+});
 
 module.exports = router;

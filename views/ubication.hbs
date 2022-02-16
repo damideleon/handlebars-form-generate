@@ -1,72 +1,66 @@
 <div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
     <div class="col-sm-8">
         <div class="row">
-            <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post"
-                action="/form/photos">
+            <form class="row shadow g-3 p-3 mb-5 needs-validation bg-body rounded-3" novalidate method="post">
                 <legend>Dirección</legend>
-                <div class="col-md-9 position-relative">
-                    <label for="dir_calle_principal" class="form-label">Calle principal</label>
-                    <input type="text" class="form-control" id="dir_calle_principal" required
-                        >
+                <div class="col-md-8 position-relative">
+                    <label for="dir_calle" class="form-label">Calle principal</label>
+                    <input type="text" class="form-control" id="dir_calle" name="dir_calle"
+                        value="{{dir_calle}}" required>
                     <div class="invalid-tooltip">
                         Ingresar nombre de la calle
                     </div>
                 </div>
-                <div class="col-md-3 position-relative">
+                <div class="col-md-4 position-relative">
                     <label for="dir_nro_casa" class="form-label">Numero de casa</label>
-                    <input type="text" class="form-control" id="dir_nro_casa"  required>
+                    <input type="text" class="form-control" id="dir_nro_casa" name="dir_nro_casa" required
+                        value="{{dir_nro_casa}}">
                     <div class="invalid-tooltip">
                         Ingresar numero de la casa
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="dir_calle_secundaria" class="form-label">Calle secundaria (opcional)</label>
-                    <div class="input-group">
-                        <select class="form-select col-md-2 col-sm-3" id="inseccion_tipo">
-                            <option value="casi">casi</option>
-                            <option value="esquina">esquina</option>
-                            <option value="entre">entre</option>
-                        </select>
-                        <input type="text" class="form-control" id="dir_calle_secundaria" >
-                    </div>
+                    <label for="dir_extra" class="form-label">Calle secundaria (opcional)</label>
+                    <input type="text" class="form-control" id="dir_extra" name="dir_extra"
+                        value="{{dir_extra}}">
                 </div>
-                <div class="row g-3  col-md-5">
-                    <div class="col-md-12">
+
+                <div class="col-md-6">
                     <label for="dir_barrio" class="form-label">Barrio</label>
-                    <input type="text" class="form-control" id="dir_barrio" required>
+                    <input type="text" class="form-control" id="dir_barrio" required value="{{dir_barrio}}">
                     <div class="invalid-tooltip">
                         Ingresar nombre del barrio
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <label for="dir_ciudad" class="form-label">Ciudad</label>
-                    <input type="text" class="form-control" id="dir_ciudad" required>
-                    <div class="invalid-tooltip">
-                        Escribir el nombre de la ciudad
-                    </div>
+                <div class="col-md-6">
+                    <label for="ciudad_id" class="form-label">Ciudad</label>
+                    <select name="ciudad_id" id="ciudad_id" class="form-select" required>
+                        
+                    </select>
+                    
                 </div>
-                 <div class="col-md-12">
+                <div class="col-md-12" style="display: none;">
                     <label for="dir_ciudad" class="form-label">Latitud</label>
-                    <input type="text" class="form-control" id="gps_lat" readonly >
+                    <input type="text" class="form-control" id="dir_gps_lat" name="dir_gps_lat" value="{{dir_gps_lat}}">
                 </div>
-                 <div class="col-md-12">
+                <div class="col-md-12" style="display: none;">
                     <label for="dir_ciudad" class="form-label">Longitud</label>
-                    <input type="text" class="form-control" id="gps_lon" readonly>
+                    <input type="text" class="form-control" id="dir_gps_lon" name="dir_gps_lon" value="{{dir_gps_lon}}">
                 </div>
-                
-                </div>
-                <div class="col-md-7">
-                     <div class="col">
-                        <label for="map" class="form-label">Indicar ubicación</label>
-                     <div id="map" style="height: 350px;"></div>
+                <div class="col-md-12">
+                    <label for="dir_referencia" class="form-label">Referencias</label>
+                    <textarea class="form-control" id="dir_referencia" name="dir_referencia"
+                        rows="5">{{dir_referencia}}</textarea>
                 </div>
 
+                <div class="col-md-12">
+                    <label for="map" class="form-label">Indicar ubicación</label>
+                    <div id="map" class="border" style="height: 350px;"></div>
                 </div>
-                
-               
+
                 <div class="col-12 pt-5">
                     <div class="d-flex justify-content-between">
-                        <a class="btn btn-dark btn-lg" href="/form"><i class="bi bi-arrow-left"></i> Atrás</a>
+                        <a class="btn btn-dark btn-lg" href="/form/datos_comercio"><i class="bi bi-arrow-left"></i> Atrás</a>
                         <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i>
                         </button>
                     </div>
@@ -90,10 +84,10 @@
         accessToken: 'pk.eyJ1IjoiZGFtaWRlbGVvbiIsImEiOiJja3pndXRobDMweXc5MnduMnB2c202cmEzIn0.H_C4H3pG0jckrR9oYiiDuQ'
     }).addTo(map);
 
-    var popup = L.popup();
-
     function onMapClick(e) {
         marker.setLatLng(e.latlng);
+        $("#dir_gps_lat").val(e.latlng.lat);
+        $("#dir_gps_lon").val(e.latlng.lng);
     }
 
     map.on('click', onMapClick);
@@ -104,9 +98,12 @@
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
     function showPosition(position) {
-        $("#gps_lat").val(position.coords.latitude);
-        $("#gps_lon").val(position.coords.longitude);
+        $("#dir_gps_lat").val(position.coords.latitude);
+        $("#dir_gps_lon").val(position.coords.longitude);
         map.setView([position.coords.latitude, position.coords.longitude]);
         marker.setLatLng([position.coords.latitude, position.coords.longitude]);
     }
+
+    $("#ciudad_id").load("/ciudades");
+    $("#ciudad_id").val("{{ciudad_id}}")
 </script>

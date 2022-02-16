@@ -1,26 +1,22 @@
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv')
+dotenv.config();
 
-const { Callbacks } = require('jquery');
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : process.env.DB_HOST,
-  user     : process.env.DB_USER,
-  password : process.env.DB_PASSWORD,
-  database : process.env.DB_DATABASE,
-  port     : process.env.DB_PORT
+//console.log(process.env)
+
+var mysql      = require('mysql2');
+
+const pool = mysql.createPool({
+  host: 'mysql.database',
+  user: 'root',
+  database: 'OBAcapuedo',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-connection.connect(function(err) {
-    if (err) {
-      console.error('error connecting: ' + err.stack);
-      return;
-    }
-   
-    console.log('connected as id ' + connection.threadId);
-  });
 
 module.exports = {
     query : (query, params, callback) =>{
-        return connection.query(query, params, callback);
+        return pool.query(query, params, callback);
     }
 };

@@ -1,14 +1,17 @@
 <div class="row d-flex justify-content-center align-items-center  bg-primary" style="min-height: 100vh;">
     <div class="col-md-8">
         <div class="row">
-                <img src="img/acapuedo-logo-transparente.png" alt="" class="mx-auto d-block" style="height: 150px; width:auto;">
-                <div class="text-light mb-5 text-center"><h1>Formar parte ahora</h1></div>
+            <img src="img/acapuedo-logo-transparente.png" alt="" class="mx-auto d-block"
+                style="height: 150px; width:auto;">
+            <div class="text-light mb-5 text-center">
+                <h1>Formar parte ahora</h1>
             </div>
-        <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post" action="/form">
+        </div>
+        <form class="row shadow g-3 p-3 needs-validation bg-body rounded-3" novalidate method="post">
             <div class="col-12 position-relative">
-                <label for="tipo_persona" class="form-label">Tipo de Negocio</label>
-                <select class="form-select" id="tipo_persona" name="tipo_persona" required>
-                    <option selected value="">Elegir tipo de persona</option>
+                <label for="tipo_registro" class="form-label">Tipo de Negocio</label>
+                <select class="form-select" id="tipo_registro" name="tipo_registro" required>
+                    <option value="" >Elegir tipo de persona</option>
                     <option value="F">Persona física (A título personal)</option>
                     <option value="J">Persona jurídica (Comercio, despensa o empresa)</option>
                 </select>
@@ -21,7 +24,7 @@
             </div>
             <div class="col-12 position-relative">
                 <label for="cedula" class="form-label">Número de cédula</label>
-                <input type="text" class="form-control" id="cedula" name="cedula"  required>
+                <input type="text" class="form-control" id="cedula" name="cedula" required value="{{celular}}">
                 <div class="invalid-feedback">
                     Debe proporcionar un número de cédula
                 </div>
@@ -29,11 +32,14 @@
             <div class="col-12 position-relative">
                 <label for="celular" class="form-label">Celular</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="celular" name="celular" required pattern="^(\+?(595)|0)(9[0-9]{2})([0-9\-]{6})$|^(\+?(595)|\+?(595) |0|)(9[0-9]{2}) ([0-9\-]{6})$|" placeholder="Ej.: 0981 123456">
+                    <input type="text" class="form-control" id="celular" name="celular" required
+                        pattern="^(\+?(595)|0)(9[0-9]{2})([0-9\-]{6})$|^(\+?(595)|\+?(595) |0|)(9[0-9]{2}) ([0-9\-]{6})$|"
+                        placeholder="Ej.: 0981 123456" value="{{celular}}">
                     <button class="btn btn-outline-secondary" type="button" id="btnEnviarPin" onclick="enviarPIN()">
                         Enviar PIN
                     </button>
-                    <button class="btn btn-outline-secondary" type="button" id="btnEnviandoPin" disabled style="display: none;">
+                    <button class="btn btn-outline-secondary" type="button" id="btnEnviandoPin" disabled
+                        style="display: none;">
                         <span class="spinner-grow spinner-grow-sm text-secondary" role="status"></span>
                         Enviando PIN...
                     </button>
@@ -44,19 +50,36 @@
             </div>
             <div class="col-12 position-relative">
                 <label for="pin" class="form-label">PIN</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="pin" name="pin" required>
-                     <button class="btn btn-primary" type="submit">Registrarse <i class="bi bi-arrow-right"></i> </button>
-                </div>
+                <input type="text" class="form-control" id="pin" name="pin" required value="{{pin}}">
                 <div class="invalid-feedback">
                     Debe proporcionar el PIN enviado
                 </div>
             </div>
+
+            {{#if error}}
             <div class="col-12">
-               
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <div>
+                        {{error}}
+                    </div>
+                </div>
+                <script>
+                    $("#tipo_registro").val('{{ tipo_registro }}')
+                </script>
+            </div>
+            {{/if}}
+
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-dark btn-lg" href="/"><i class="bi bi-arrow-left"></i> Atrás</a>
+                    <button class="btn btn-primary btn-lg" type="submit">Siguiente <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
             </div>
 
         </form>
+
     </div>
 </div>
 
@@ -64,18 +87,29 @@
 
 <script>
 
-    function enviarPIN(){
+    function enviarPIN() {
         $("#btnEnviarPin").hide();
         $("#btnEnviandoPin").show();
 
-        $.post("./signup/sendpin/"+ $("#celular").val(), (data)=>{
+        number = $("#celular").val().replace(/\s/g, '');
+        regex = /^(\+?(595)|0)(9[0-9]{2})([0-9\-]{6})$/;
+
+        if (regex.test(number)) {
+            $.post("./signup/sendpin/" + number, (data) => {
+                $("#btnEnviandoPin").hide();
+                $("#btnEnviarPin").show();
+                $("#btnEnviarPin").html("Reenviar PIN");
+                console.log(data);
+            });
+        } else {
+            $("#celular").addClass("form-check-input is-invalid")
             $("#btnEnviandoPin").hide();
             $("#btnEnviarPin").show();
             $("#btnEnviarPin").html("Reenviar PIN");
+        }
 
 
-            console.log(data);
-        });
+
     }
 
 </script>
